@@ -1,0 +1,15 @@
+traversing methods In jquery
+
+parent
+Perents
+parentsUntil
+children
+find
+find(*) ===== findAll
+siblings
+next
+nextAll
+nextUntil
+prev
+prevAll
+prevUntil    

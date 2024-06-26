@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form-Validation</title>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"></script>
+    <style>
+       div {
+        width: 600px;
+        /* border: 1px solid grey; */
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 2px 2px 10px grey, -2px -2px 10px grey;
+        margin: auto;
+      }
+      .form1 {
+        /* margin: auto; */
+        padding-left: 100px;
+      }
+      input[type="text"],
+      input[type="number"],
+      input[type="password"] {
+        padding: 10px;
+        width: 200px;
+      }
+      input[type="submit"] {
+        padding: 10px;
+        border-radius: 6px;
+        background-color: rgba(14, 116, 14, 0.537);
+        font-weight: 600;
+      }
+      .container {
+        margin-top: 10px;
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        font-size: 18px;
+      }
+      .container input {
+        width: 0;
+      }
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 23px;
+        width: 23px;
+        border: 1px solid black;
+      }
+      .container:hover input ~ .checkmark {
+        background-color: #dce4e4fd;
+      }
+      .container input:checked ~ .checkmark {
+        background-color: #1a76afff;
+      }
+      .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+      .container input:checked ~ .checkmark:after {
+        display: block;
+      }
+      .container .checkmark:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        transform: rotate(45deg);
+      }
+    </style>
+  </head>
+  <body>
+      <form id="frm">
+        <div class="form1">
+          <input type="text" id="name" placeholder="Enter Name Here...." /><br />
+          <span id="name-err" style="color: red; display: none; font-weight: 300">*Name cannot be empty</span><br />
+          <input type="number" id="contact" placeholder="Enter Contact Number...."/><br />
+          <span id="contact-err" style="color: red; display: none; font-weight: 300">*Contact Number cannot be empty</span>
+          <span id="length-err" style="color: red; display: none; font-weight: 300">*Contact Number has to be 10 digits long</span><br />
+          <input type="password" id="password" placeholder="Enter Your Password...." pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-])$"/><br>
+          <label class="container">Show Password
+          <input type="checkbox" onclick="myFunction()" />
+          <span class="checkmark"></span>
+          </label>
+          <span id="password-err" style="color: red; display: none; font-weight: 300">*Password cannot be empty</span>
+          <span id="plength-err" style="color: red; display: none; font-weight: 300">*Password must be at least 8 characters long</span>
+          <span id="pval1-err" style="color: red; display: none; font-weight: 300">*Password must contain at least one lowercase letter</span>
+          <span id="pval2-err" style="color: red; display: none; font-weight: 300">*Password must contain at least one uppercase letter</span>
+          <span id="pval3-err" style="color: red; display: none; font-weight: 300">*Password must contain at least one numeric character</span>
+          <span id="pval4-err" style="color: red; display: none; font-weight: 300">*Password must contain at least one special character(!@#$%^&*_=+-)</span><br>
+          <input type="password" id="confirm-pass" placeholder="Enter Confirm Password here...."><br>
+          <span id="confirm-err" style="color: red; display: none; font-weight: 300">*Password did not match</span><br>
+          <input type="text" id="email" placeholder="Enter Email Here....">
+          <span  id="email-err" style="color: red; display: none; font-weight: 300">*Email cannot be empty</span>
+          <span id="eval-err" style="color: red; display: none; font-weight: 300">*Email must contain lowercase characters</span>
+          <span id="eval1-err" style="color: red; display: none; font-weight: 300">*Enter valid email id</span><br><br>
+          <input type="submit" value="Submit" />
+        </div>
+      </form>
+
+    <script>
+      $(document).ready(function () {
+        $("#frm").submit(function (e) {
+          e.preventDefault();
+          var name1 = $("#name").val();
+          var contact1 = $("#contact").val();
+          var password1 = $("#password").val();
+          var email1 = $('#email').val();
+          var confirm_pass1 = $('#confirm-pass')
+        
+          if (name1 == "") {
+            $("#name-err").css("display", "block");
+          } else {
+            $("#name-err").css("display", "none");
+          }
+
+          if (contact1 == "") {
+            $("#contact-err").css("display", "block");
+          } else {
+            $("#contact-err").css("display", "none");
+          }
+          if (contact1.length != 10) {
+            $("#length-err").css("display", "block");
+          } else {
+            $("#length-err").css("display", "none");
+          }
+
+          if (password1 == "") {
+            $("#password-err").css("display", "block");
+          } else {
+            $("#password-err").css("display", "none");
+          }
+          if (password1.length < 8) {
+            $("#plength-err").css("display", "block");
+          } else {
+            $("#plength-err").css("display", "none");
+          }
+          if (!/[a-z]/.test(password1)) {
+            $("#pval1-err").css("display", "block");
+          } else {
+            $("#pval1-err").css("display", "none");
+          }
+          if (!/[A-Z]/.test(password1)) {
+            $("#pval2-err").css("display", "block");
+          } else {
+            $("#pval2-err").css("display", "none");
+          }
+          if (!/\d/.test(password1)) {
+            $("#pval3-err").css("display", "block");
+          } else {
+            $("#pval3-err").css("display", "none");
+          }
+          if (!/[!@#$%^&*_=+-]/.test(password1)) {
+            $("#pval4-err").css("display", "block");
+          } else {
+            $("#pval4-err").css("display", "none");
+          }
+
+          if(confirm_pass1 != password1){
+            $('#confirm-err').css("display","block")
+          }else {
+            $('#confirm-err').css("display","none")
+          }
+
+
+          if (email1 == "") {
+            $("#email-err").css("display", "block");
+          } else {
+            $("#email-err").css("display", "none");
+          }
+          if (/[A-Z]/.test(email1)) {
+            $("#eval-err").css("display", "block");
+          } else {
+            $("#eval-err").css("display", "none");
+          }
+          if(!/[@]/.test(email1)){
+            $('#eval1-err').css("display","block")
+          }else{
+            $("#eval1-err").css("display", "none");
+          }
+          if(!/[.]/.test(email1)){
+            $('#eval1-err').css("display","block")
+          }else{
+            $("#eval1-err").css("display", "none");
+          }
+
+         
+
+        });
+      });
+
+      function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+          x.type = "text";
+        } else {
+          x.type = "password";
+        }
+      }
+    </script>
+  </body>
+</html>

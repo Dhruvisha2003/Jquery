@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css
+    ">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+</head>
+<style>
+    button{
+        margin-top: 20px;
+        margin-left: 20px;
+        padding: 10px;
+        background-color: cornflowerblue;
+    }
+</style>
+<body>
+
+    <div class="button-group filter-button-group">
+        <button data-filter="*">Show all</button>
+        <button data-filter=".metal">Metal</button>
+        <button data-filter=".transition">Transition</button>
+        <button data-filter=".alkali, .alkaline-earth">Alkali & Alkaline-earth</button>
+        <button data-filter=":not(.transition)">Not Transition</button>
+        <button data-filter=".metal:not(.transition)">Metal but not transition</button>
+    </div>
+
+    <div class="grid row row-cols-4 g-4 mt-5">
+        <div class="element-item transition metal">
+            <div class="box" style="padding: 20px ;height: 100px; background-color: lightskyblue; ">
+                <a href="isotope/images.jpg" class="open_box" style="text-decoration: none;">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</a>
+            </div>
+        </div>
+        <div class="element-item post-transition metal">
+            <div class="box" style="padding: 20px ;height: 100px; background-color: lightskyblue;">
+                <a href="isotope/images.jpg" class="open_box" style="text-decoration: none;">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</a>
+            </div>
+        </div>
+        <div class="element-item alkali metal">
+            <div class="box" style="padding: 20px ;height: 100px; background-color: lightskyblue;">
+                <a href="isotope/images.jpg" class="open_box" style="text-decoration: none;">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</a>
+            </div>
+        </div>
+        <div class="element-item transition metal">
+            <div class="box" style="padding: 20px ;height: 100px; background-color: lightskyblue;">
+                <a href="isotope/images.jpg" class="open_box" style="text-decoration: none;">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</a>
+            </div>
+        </div>
+        <div class="element-item lanthanoid metal inner-transition">
+            <div class="box" style="padding: 20px ;height: 100px; background-color: lightskyblue;">
+                <a href="isotope/images.jpg" class="open_box" style="text-decoration: none;">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</a>
+            </div>
+        </div>
+        <div class="element-item halogen nonmetal">
+            <div class="box" style="padding: 20px ;height: 100px; background-color: lightskyblue;">
+                <a href="isotope/images.jpg" class="open_box" style="text-decoration: none;">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</a>
+            </div>
+        </div>
+        <div class="element-item alkaline-earth metal">
+            <div class="box" style="padding: 20px ;height: 100px; background-color: lightskyblue;">
+                <a href="isotope/images.jpg" class="open_box" style="text-decoration: none;">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</a>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // init Isotope
+            var $grid = $('.grid').isotope({
+                // options
+            });
+            // filter items on button click
+            $('.filter-button-group').on('click', 'button', function () {
+                var filterValue = $(this).attr('data-filter');
+                $grid.isotope({ filter: filterValue });
+            });
+
+            $("a.open_box").fancybox({
+                'transitionIn'	:	'elastic',
+                'transitionOut'	:	'elastic',
+                'speedIn'		:	1000, 
+                'speedOut'		:	200, 
+                'overlayShow'	:	true
+            });
+        })
+    </script>
+
+</body>
+
+</html>

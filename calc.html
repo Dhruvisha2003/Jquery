@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<style>
+    input[type=text] {
+        padding: 15px;
+        background-color: rgb(206, 214, 223);
+        border-radius: 5px;
+    }
+    #reset{
+        padding-inline: 20px;
+        padding-block: 10px;
+        background-color: rgba(65, 127, 61, 0.831);
+        color: white;
+        font-weight: bold;
+    }
+</style>
+
+<body>
+    <form id="calculator" style="padding-bottom: 10px;">
+        <input type="text" class="int" name="num1" id="num1" placeholder="Enter number">
+        <input type="text" class="int" name="op" id="op" placeholder="Enter operator (+, -, *, /)">
+        <input type="text" class="int" name="num2" id="num2" placeholder="Enter number">
+        <input type="text" class="int" name="ans" id="ans" readonly>
+    </form>
+    <button id="reset">Reset</button>
+
+    <script>
+        $(document).ready(function () {
+            $('.int').on('input', function () {
+                var num1 = parseInt($('#num1').val());
+                var num2 = parseInt($('#num2').val());
+                var op = $('#op').val();
+                var result = '';
+
+                if (!isNaN(num1) && !isNaN(num2)) {
+                    switch (op) {
+                        case '+':
+                            result = num1 + num2;
+                            break;
+                        case '-':
+                            result = num1 - num2;
+                            break;
+                        case '*':
+                            result = num1 * num2;
+                            break;
+                        case '/':
+                            result = num1 / num2;
+                            break;
+                        default:
+                            result = 'Invalid operator';
+                    }
+                }
+                $('#ans').val(result);
+            });
+            $('#reset').click(function(){
+                $('.int').val('');
+                $('#ans').val('');
+            })
+        });
+    
+    </script>
+</body>
+
+</html>
